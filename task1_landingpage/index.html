@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Zivora — Shop the Future</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:      #080c0a;
+      --ink2:     #0e1510;
+      --card:     #121a14;
+      --border:   rgba(134,187,140,0.12);
+      --green:    #22c55e;
+      --green2:   #16a34a;
+      --gold:     #d4a843;
+      --gold2:    #f0c96a;
+      --text:     #e8f0ea;
+      --muted:    #7a9980;
+      --radius:   16px;
+      --serif:    'Playfair Display', Georgia, serif;
+      --sans:     'Plus Jakarta Sans', -apple-system, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--ink);
+      color: var(--text);
+      font-family: var(--sans);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0 6%; height: 70px;
+      background: rgba(8,12,10,0.88);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .logo {
+      font-family: var(--serif);
+      font-size: 1.55rem; font-weight: 800;
+      background: linear-gradient(90deg, var(--gold), var(--gold2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: 0.02em;
+    }
+    .nav-links { display: flex; list-style: none; gap: 4px; }
+    .nav-links a {
+      text-decoration: none; color: var(--muted);
+      font-size: 0.875rem; font-weight: 500;
+      padding: 7px 14px; border-radius: 8px;
+      transition: color .2s, background .2s;
+    }
+    .nav-links a:hover { color: var(--text); background: rgba(255,255,255,0.05); }
+    .nav-cta {
+      background: var(--gold) !important;
+      color: #0a0a0a !important;
+      font-weight: 700 !important;
+      padding: 8px 20px !important;
+    }
+    .nav-cta:hover { background: var(--gold2) !important; transform: translateY(-1px); }
+    .nav-icons { display: flex; gap: 1rem; align-items: center; }
+    .nav-icon { font-size: 1.1rem; cursor: pointer; color: var(--muted); transition: color .2s; }
+    .nav-icon:hover { color: var(--gold); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 7rem 6% 4rem;
+      position: relative;
+      overflow: hidden;
+      gap: 3rem;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 55% 60% at 10% 40%, rgba(34,197,94,0.10) 0%, transparent 65%),
+        radial-gradient(ellipse 40% 50% at 90% 20%, rgba(212,168,67,0.10) 0%, transparent 60%),
+        radial-gradient(ellipse 35% 40% at 70% 90%, rgba(34,197,94,0.06) 0%, transparent 55%);
+    }
+    .hero-left { position: relative; z-index: 1; }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(212,168,67,0.1);
+      border: 1px solid rgba(212,168,67,0.25);
+      color: var(--gold);
+      font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 6px 14px; border-radius: 999px;
+      margin-bottom: 1.5rem;
+    }
+    .pulse-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--gold);
+      animation: blink 1.8s infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(2.6rem, 5vw, 4.2rem);
+      font-weight: 800; line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.2rem;
+    }
+    .hero h1 em {
+      font-style: normal;
+      background: linear-gradient(135deg, var(--green), #86efac);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      font-size: 1.05rem; color: var(--muted);
+      max-width: 420px; margin-bottom: 2.2rem; line-height: 1.75;
+    }
+    .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 2.5rem; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 13px 26px; border-radius: 10px;
+      font-size: 0.95rem; font-weight: 700;
+      text-decoration: none; cursor: pointer;
+      transition: all .2s; border: none; font-family: var(--sans);
+    }
+    .btn-gold {
+      background: linear-gradient(135deg, var(--gold), var(--gold2));
+      color: #0a0a0a;
+      box-shadow: 0 0 28px rgba(212,168,67,0.3);
+    }
+    .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 6px 36px rgba(212,168,67,0.45); }
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1.5px solid rgba(255,255,255,0.12);
+    }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+
+    .trust-row {
+      display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+    }
+    .trust-avatars { display: flex; }
+    .t-av {
+      width: 32px; height: 32px; border-radius: 50%;
+      border: 2px solid var(--ink);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.85rem; font-weight: 700;
+      margin-left: -8px;
+    }
+    .t-av:first-child { margin-left: 0; }
+    .trust-text { font-size: 0.8rem; color: var(--muted); }
+    .trust-text strong { color: var(--gold); }
+
+    /* HERO RIGHT — product showcase */
+    .hero-right {
+      position: relative; z-index: 1;
+      display: flex; flex-direction: column; gap: 1rem;
+    }
+    .product-showcase {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+    }
+    .product-mini {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.2rem;
+      transition: border-color .25s, transform .25s;
+      position: relative; overflow: hidden;
+    }
+    .product-mini:hover { border-color: rgba(212,168,67,0.35); transform: translateY(-4px); }
+    .product-mini:nth-child(2) { margin-top: 1.5rem; }
+    .product-mini:nth-child(4) { margin-top: -1.5rem; }
+    .product-emoji { font-size: 2.4rem; margin-bottom: 0.7rem; display: block; }
+    .product-mini-name { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.2rem; }
+    .product-mini-price { font-size: 0.85rem; color: var(--gold); font-weight: 700; }
+    .product-mini-original { font-size: 0.75rem; color: var(--muted); text-decoration: line-through; margin-left: 4px; }
+    .product-badge {
+      position: absolute; top: 10px; right: 10px;
+      background: var(--green2);
+      color: #fff; font-size: 0.65rem; font-weight: 700;
+      padding: 3px 7px; border-radius: 999px;
+      letter-spacing: 0.06em;
+    }
+    .wishlist-btn {
+      position: absolute; bottom: 10px; right: 10px;
+      font-size: 1rem; cursor: pointer;
+      transition: transform .2s;
+    }
+    .wishlist-btn:hover { transform: scale(1.3); }
+
+    /* offer strip */
+    .offer-strip {
+      background: linear-gradient(90deg, rgba(34,197,94,0.08), rgba(212,168,67,0.08));
+      border: 1px solid rgba(212,168,67,0.2);
+      border-radius: 10px;
+      padding: 0.75rem 1.2rem;
+      display: flex; align-items: center; gap: 0.7rem;
+      font-size: 0.8rem; color: var(--gold);
+      font-weight: 600;
+    }
+
+    /* ── STATS ── */
+    .stats-bar {
+      background: var(--ink2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      display: flex; justify-content: center; flex-wrap: wrap;
+    }
+    .stat {
+      text-align: center; padding: 1.6rem 3rem;
+      border-right: 1px solid var(--border);
+      flex: 1; min-width: 160px;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-num {
+      font-family: var(--serif);
+      font-size: 2rem; font-weight: 800;
+      background: linear-gradient(135deg, var(--gold), var(--gold2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: block;
+    }
+    .stat-label { font-size: 0.78rem; color: var(--muted); font-weight: 500; margin-top: 3px; }
+
+    /* ── SECTIONS ── */
+    .section { padding: 5.5rem 6%; }
+    .section-alt { background: var(--ink2); }
+    .eyebrow {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--green);
+      margin-bottom: 0.7rem;
+    }
+    .sec-title {
+      font-family: var(--serif);
+      font-size: clamp(1.7rem, 3.5vw, 2.5rem);
+      font-weight: 800; letter-spacing: -0.02em;
+      margin-bottom: 0.7rem; line-height: 1.2;
+    }
+    .sec-sub {
+      font-size: 0.95rem; color: var(--muted);
+      max-width: 440px; margin-bottom: 3rem; line-height: 1.75;
+    }
+    .sec-line {
+      width: 40px; height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--green));
+      border-radius: 2px; margin: 0.6rem 0 2.5rem;
+    }
+
+    /* ── CATEGORIES ── */
+    .cat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 1rem;
+    }
+    .cat-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.5rem 1rem;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color .25s, transform .25s, background .25s;
+    }
+    .cat-card:hover {
+      border-color: rgba(212,168,67,0.4);
+      background: rgba(212,168,67,0.04);
+      transform: translateY(-4px);
+    }
+    .cat-icon { font-size: 2rem; margin-bottom: 0.6rem; display: block; }
+    .cat-name { font-size: 0.875rem; font-weight: 600; color: var(--text); }
+    .cat-count { font-size: 0.72rem; color: var(--muted); margin-top: 2px; }
+
+    /* ── FEATURED PRODUCTS ── */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 1.2rem;
+    }
+    .product-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: transform .25s, border-color .25s, box-shadow .25s;
+      position: relative;
+    }
+    .product-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(212,168,67,0.35);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+    }
+    .product-img {
+      height: 160px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 4rem; position: relative;
+    }
+    .product-tag {
+      position: absolute; top: 10px; left: 10px;
+      font-size: 0.65rem; font-weight: 700;
+      padding: 3px 8px; border-radius: 999px;
+      text-transform: uppercase; letter-spacing: 0.07em;
+    }
+    .tag-sale { background: #dc2626; color: #fff; }
+    .tag-new  { background: var(--green2); color: #fff; }
+    .tag-hot  { background: var(--gold); color: #0a0a0a; }
+    .heart-btn {
+      position: absolute; top: 10px; right: 10px;
+      width: 32px; height: 32px; border-radius: 50%;
+      background: rgba(0,0,0,0.4); backdrop-filter: blur(6px);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.9rem; cursor: pointer;
+      border: 1px solid var(--border);
+      transition: background .2s, transform .2s;
+    }
+    .heart-btn:hover { background: rgba(220,38,38,0.2); transform: scale(1.15); }
+    .product-body { padding: 1.1rem; }
+    .product-brand { font-size: 0.7rem; color: var(--muted); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 3px; }
+    .product-name { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .product-rating { display: flex; align-items: center; gap: 5px; margin-bottom: 0.6rem; }
+    .stars-s { color: #f59e0b; font-size: 0.7rem; }
+    .rating-count { font-size: 0.7rem; color: var(--muted); }
+    .product-price-row { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.9rem; }
+    .price-now { font-size: 1.05rem; font-weight: 800; color: var(--gold); }
+    .price-was { font-size: 0.78rem; color: var(--muted); text-decoration: line-through; }
+    .price-off { font-size: 0.7rem; color: var(--green); font-weight: 700; }
+    .add-cart {
+      width: 100%;
+      background: rgba(212,168,67,0.1);
+      border: 1px solid rgba(212,168,67,0.25);
+      color: var(--gold);
+      padding: 8px;
+      border-radius: 8px;
+      font-size: 0.82rem; font-weight: 700;
+      cursor: pointer; font-family: var(--sans);
+      transition: background .2s, color .2s;
+    }
+    .add-cart:hover { background: var(--gold); color: #0a0a0a; }
+
+    /* ── WHY ZIVORA — BENTO ── */
+    .bento {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: auto auto;
+      gap: 1rem;
+    }
+    .bento-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.7rem;
+      transition: border-color .25s, transform .25s;
+      position: relative; overflow: hidden;
+    }
+    .bento-card::after {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--gold), var(--green));
+      opacity: 0; transition: opacity .25s;
+    }
+    .bento-card:hover { border-color: rgba(212,168,67,0.3); transform: translateY(-3px); }
+    .bento-card:hover::after { opacity: 1; }
+    .bento-card.wide { grid-column: span 2; }
+    .bento-card.tall { grid-row: span 2; }
+    .bento-icon { font-size: 1.8rem; margin-bottom: 0.9rem; }
+    .bento-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .bento-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.65; }
+
+    /* delivery tracker inside bento */
+    .tracker { margin-top: 1.2rem; }
+    .track-steps { display: flex; align-items: center; gap: 0; margin-top: 0.8rem; }
+    .track-step { flex: 1; text-align: center; font-size: 0.65rem; color: var(--muted); }
+    .track-dot {
+      width: 22px; height: 22px; border-radius: 50%;
+      margin: 0 auto 4px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.65rem;
+    }
+    .track-dot.done { background: var(--green2); color: #fff; }
+    .track-dot.active { background: var(--gold); color: #0a0a0a; animation: blink 1.2s infinite; }
+    .track-dot.pending { background: rgba(255,255,255,0.07); color: var(--muted); }
+    .track-line { flex: 1; height: 2px; background: rgba(255,255,255,0.08); margin-bottom: 18px; }
+    .track-line.done { background: var(--green2); }
+
+    /* progress bar */
+    .progress-track { height: 5px; background: rgba(255,255,255,0.08); border-radius: 999px; overflow: hidden; margin-top: 0.8rem; }
+    .progress-fill {
+      height: 100%; border-radius: 999px;
+      background: linear-gradient(90deg, var(--green2), var(--gold));
+      animation: fillBar 2.2s ease forwards; width: 0;
+    }
+    @keyframes fillBar { to { width: var(--w); } }
+    .progress-meta { display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--muted); margin-top: 5px; }
+
+    /* ── DEALS SECTION ── */
+    .deals-grid {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr 1fr;
+      gap: 1rem;
+    }
+    .deal-card {
+      border-radius: var(--radius);
+      padding: 2rem;
+      position: relative; overflow: hidden;
+      min-height: 200px;
+      display: flex; flex-direction: column; justify-content: flex-end;
+    }
+    .deal-card h3 { font-family: var(--serif); font-size: 1.3rem; font-weight: 800; margin-bottom: 0.3rem; }
+    .deal-card p { font-size: 0.82rem; color: rgba(255,255,255,0.7); margin-bottom: 0.9rem; }
+    .deal-emoji {
+      position: absolute; top: 1.2rem; right: 1.5rem;
+      font-size: 3.5rem; opacity: 0.6;
+    }
+    .deal-btn {
+      display: inline-block;
+      background: rgba(255,255,255,0.15); backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #fff; padding: 7px 16px; border-radius: 8px;
+      font-size: 0.8rem; font-weight: 700;
+      text-decoration: none; transition: background .2s;
+      width: fit-content;
+    }
+    .deal-btn:hover { background: rgba(255,255,255,0.25); }
+
+    /* ── TESTIMONIALS ── */
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.1rem;
+    }
+    .test-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.7rem;
+      transition: border-color .2s;
+    }
+    .test-card:hover { border-color: rgba(212,168,67,0.3); }
+    .stars-r { color: #f59e0b; font-size: 0.85rem; margin-bottom: 0.9rem; }
+    .test-card p { font-size: 0.875rem; color: var(--muted); line-height: 1.75; margin-bottom: 1.2rem; }
+    .test-author { display: flex; align-items: center; gap: 0.8rem; }
+    .test-av {
+      width: 38px; height: 38px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; font-weight: 800; flex-shrink: 0;
+    }
+    .test-name { font-size: 0.875rem; font-weight: 700; }
+    .test-role { font-size: 0.72rem; color: var(--muted); }
+    .verified-badge { font-size: 0.65rem; color: var(--green); font-weight: 700; margin-left: auto; }
+
+    /* ── CTA BANNER ── */
+    .cta-banner {
+      margin: 0 6% 5.5rem;
+      border-radius: 20px;
+      padding: 4.5rem 3.5rem;
+      text-align: center;
+      position: relative; overflow: hidden;
+      background: linear-gradient(135deg, #0d2b14 0%, #1a1a00 50%, #0d2b14 100%);
+      border: 1px solid rgba(34,197,94,0.2);
+    }
+    .cta-banner::before {
+      content: '';
+      position: absolute; top: -80px; right: -80px;
+      width: 280px; height: 280px; border-radius: 50%;
+      background: rgba(212,168,67,0.06);
+    }
+    .cta-banner::after {
+      content: '';
+      position: absolute; bottom: -100px; left: -60px;
+      width: 320px; height: 320px; border-radius: 50%;
+      background: rgba(34,197,94,0.05);
+    }
+    .cta-banner h2 {
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800; letter-spacing: -0.02em;
+      margin-bottom: 0.8rem; position: relative; z-index: 1;
+    }
+    .cta-banner p { color: var(--muted); font-size: 0.95rem; margin-bottom: 2rem; position: relative; z-index: 1; }
+    .cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; position: relative; z-index: 1; }
+
+    /* ── CONTACT ── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem; align-items: start;
+    }
+    .contact-info { display: flex; flex-direction: column; gap: 1rem; }
+    .contact-item {
+      display: flex; align-items: center; gap: 1rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.1rem 1.3rem;
+      text-decoration: none; color: var(--text);
+      transition: border-color .2s;
+      font-size: 0.9rem;
+    }
+    .contact-item:hover { border-color: rgba(212,168,67,0.35); }
+    .contact-icon { font-size: 1.2rem; }
+    .contact-label { font-size: 0.7rem; color: var(--muted); margin-left: auto; font-family: monospace; }
+
+    .contact-form { display: flex; flex-direction: column; gap: 0.8rem; }
+    .form-input, .form-textarea {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.85rem 1.1rem;
+      color: var(--text);
+      font-family: var(--sans); font-size: 0.9rem;
+      transition: border-color .2s; outline: none;
+      width: 100%;
+    }
+    .footer-socials { display: flex; gap: 0.6rem; margin-top: 1.2rem; }
+    .social-btn {
+      width: 34px; height: 34px; border-radius: 8px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.9rem; cursor: pointer;
+      transition: background .2s, border-color .2s;
+    }
+    .social-btn:hover { background: rgba(212,168,67,0.1); border-color: rgba(212,168,67,0.3); }
+    .footer-col h4 { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.1rem; color: var(--text); }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+    .footer-col a { font-size: 0.85rem; color: var(--muted); text-decoration: none; transition: color .2s; }
+    .footer-col a:hover { color: var(--gold); }
+    .footer-bottom {
+      display: flex; justify-content: space-between; align-items: center;
+      border-top: 1px solid var(--border); padding-top: 1.5rem;
+      font-size: 0.78rem; color: var(--muted); flex-wrap: wrap; gap: 0.5rem;
+    }
+
+    /* ── REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.visible { opacity: 1 !important; transform: translateY(0) !important; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 960px) {
+      .hero { grid-template-columns: 1fr; text-align: center; }
+      .hero-sub { margin: 0 auto 2rem; }
+      .hero-btns { justify-content: center; }
+      .trust-row { justify-content: center; }
+      .hero-right { display: none; }
+      .bento { grid-template-columns: 1fr 1fr; }
+      .bento-card.wide { grid-column: span 2; }
+      .bento-card.tall { grid-row: span 1; }
+      .deals-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 640px) {
+      nav { padding: 0 5%; }
+      .nav-links { display: none; }
+      .section { padding: 3.5rem 5%; }
+      .bento { grid-template-columns: 1fr; }
+      .bento-card.wide, .bento-card.tall { grid-column: span 1; grid-row: span 1; }
+      .stat { border-right: none; border-bottom: 1px solid var(--border); }
+      .stat:last-child { border-bottom: none; }
+      .footer-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+      .cta-banner { margin: 0 5% 3.5rem; padding: 3rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Zivora</div>
+  <ul class="nav-links">
+    <li><a href="#categories">Shop</a></li>
+    <li><a href="#products">Products</a></li>
+    <li><a href="#deals">Deals</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#" class="nav-cta">Sign Up Free</a></li>
+  </ul>
+  <div class="nav-icons">
+    <span class="nav-icon">🔍</span>
+    <span class="nav-icon">🛒</span>
+    <span class="nav-icon">👤</span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-left">
+    <div class="hero-eyebrow"><span class="pulse-dot"></span>New Arrivals · Summer 2025</div>
+    <h1>Shop Smarter.<br>Live <em>Better.</em></h1>
+    <p class="hero-sub">Zivora brings you curated fashion, electronics, home décor and more — delivered fast, with zero hassle. Your next favourite thing is one click away.</p>
+    <div class="hero-btns">
+      <a href="#products" class="btn btn-gold">🛍️ Explore Now</a>
+      <a href="#deals" class="btn btn-outline">🔥 View Deals</a>
+    </div>
+    <div class="trust-row">
+      <div class="trust-avatars">
+        <div class="t-av" style="background:linear-gradient(135deg,#16a34a,#86efac)">D</div>
+        <div class="t-av" style="background:linear-gradient(135deg,#d97706,#fde68a)">A</div>
+        <div class="t-av" style="background:linear-gradient(135deg,#7c3aed,#a78bfa)">R</div>
+        <div class="t-av" style="background:linear-gradient(135deg,#db2777,#f9a8d4)">S</div>
+      </div>
+      <span class="trust-text"><strong>1.2M+</strong> happy shoppers trust Zivora</span>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="product-showcase">
+      <div class="product-mini">
+        <span class="product-emoji">👟</span>
+        <div class="product-mini-name">Air Stride Pro</div>
+        <span class="product-mini-price">₹2,499</span>
+        <span class="product-mini-original">₹3,999</span>
+        <span class="product-badge">38% OFF</span>
+        <span class="wishlist-btn">🤍</span>
+      </div>
+      <div class="product-mini">
+        <span class="product-emoji">👜</span>
+        <div class="product-mini-name">Luxe Tote Bag</div>
+        <span class="product-mini-price">₹1,299</span>
+        <span class="product-mini-original">₹2,000</span>
+        <span class="product-badge">NEW</span>
+        <span class="wishlist-btn">🤍</span>
+      </div>
+      <div class="product-mini">
+        <span class="product-emoji">⌚</span>
+        <div class="product-mini-name">Smart Watch X2</div>
+        <span class="product-mini-price">₹4,999</span>
+        <span class="product-mini-original">₹7,500</span>
+        <span class="product-badge">HOT</span>
+        <span class="wishlist-btn">🤍</span>
+      </div>
+      <div class="product-mini">
+        <span class="product-emoji">🕶️</span>
+        <div class="product-mini-name">UV Shade Elite</div>
+        <span class="product-mini-price">₹899</span>
+        <span class="product-mini-original">₹1,400</span>
+        <span class="product-badge">35% OFF</span>
+        <span class="wishlist-btn">🤍</span>
+      </div>
+    </div>
+    <div class="offer-strip">
+      🎉 <span>Free delivery on orders above ₹499 · Use code <strong>ZIVORA10</strong> for 10% off</span>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat"><span class="stat-num">1.2M+</span><span class="stat-label">Happy Shoppers</span></div>
+  <div class="stat"><span class="stat-num">50K+</span><span class="stat-label">Products Listed</span></div>
+  <div class="stat"><span class="stat-num">4.8★</span><span class="stat-label">Average Rating</span></div>
+  <div class="stat"><span class="stat-num">24hr</span><span class="stat-label">Delivery Speed</span></div>
+  <div class="stat"><span class="stat-num">100%</span><span class="stat-label">Secure Payments</span></div>
+</div>
+
+<!-- CATEGORIES -->
+<section id="categories" class="section reveal">
+  <div class="eyebrow">Browse by Category</div>
+  <h2 class="sec-title">Shop What You Love</h2>
+  <div class="sec-line"></div>
+  <div class="cat-grid">
+    <div class="cat-card"><span class="cat-icon">👗</span><div class="cat-name">Fashion</div><div class="cat-count">12,400+ items</div></div>
+    <div class="cat-card"><span class="cat-icon">📱</span><div class="cat-name">Electronics</div><div class="cat-count">8,200+ items</div></div>
+    <div class="cat-card"><span class="cat-icon">🏠</span><div class="cat-name">Home Décor</div><div class="cat-count">6,500+ items</div></div>
+    <div class="cat-card"><span class="cat-icon">💄</span><div class="cat-name">Beauty</div><div class="cat-count">4,800+ items</div></div>
+    <div class="cat-card"><span class="cat-icon">⌚</span><div class="cat-name">Accessories</div><div class="cat-count">3,900+ items</div></div>
+    <div class="cat-card"><span class="cat-icon">👟</span><div class="cat-name">Footwear</div><div class="cat-count">5,100+ items</div></div>
+    <div class="cat-card"><span class="cat-icon">📚</span><div class="cat-name">Books</div><div class="cat-count">2,300+ items</div></div>
+    <div class="cat-card"><span class="cat-icon">🎮</span><div class="cat-name">Gaming</div><div class="cat-count">1,700+ items</div></div>
+  </div>
+</section>
+
+<!-- FEATURED PRODUCTS -->
+<section id="products" class="section section-alt reveal">
+  <div class="eyebrow">Trending Now</div>
+  <h2 class="sec-title">Featured Products</h2>
+  <div class="sec-line"></div>
+  <div class="products-grid">
+    <div class="product-card">
+      <div class="product-img" style="background:linear-gradient(135deg,#0f2d1a,#0a1f10)">
+        👟
+        <span class="product-tag tag-sale">SALE</span>
+        <div class="heart-btn">🤍</div>
+      </div>
+      <div class="product-body">
+        <div class="product-brand">Nike</div>
+        <div class="product-name">Air Max Comfy Runner</div>
+        <div class="product-rating"><span class="stars-s">★★★★★</span><span class="rating-count">(1,240)</span></div>
+        <div class="product-price-row">
+          <span class="price-now">₹3,299</span>
+          <span class="price-was">₹5,499</span>
+          <span class="price-off">40% off</span>
+        </div>
+        <button class="add-cart">+ Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img" style="background:linear-gradient(135deg,#1a0d2e,#0d0620)">
+        📱
+        <span class="product-tag tag-new">NEW</span>
+        <div class="heart-btn">🤍</div>
+      </div>
+      <div class="product-body">
+        <div class="product-brand">Samsung</div>
+        <div class="product-name">Galaxy A55 5G</div>
+        <div class="product-rating"><span class="stars-s">★★★★☆</span><span class="rating-count">(892)</span></div>
+        <div class="product-price-row">
+          <span class="price-now">₹29,999</span>
+          <span class="price-was">₹34,999</span>
+          <span class="price-off">14% off</span>
+        </div>
+        <button class="add-cart">+ Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img" style="background:linear-gradient(135deg,#2d1a0f,#1a0f06)">
+        👜
+        <span class="product-tag tag-hot">HOT</span>
+        <div class="heart-btn">🤍</div>
+      </div>
+      <div class="product-body">
+        <div class="product-brand">Caprese</div>
+        <div class="product-name">Luxe Leather Satchel</div>
+        <div class="product-rating"><span class="stars-s">★★★★★</span><span class="rating-count">(432)</span></div>
+        <div class="product-price-row">
+          <span class="price-now">₹1,899</span>
+          <span class="price-was">₹2,999</span>
+          <span class="price-off">37% off</span>
+        </div>
+        <button class="add-cart">+ Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img" style="background:linear-gradient(135deg,#0f1a2d,#060d1a)">
+        ⌚
+        <span class="product-tag tag-sale">SALE</span>
+        <div class="heart-btn">🤍</div>
+      </div>
+      <div class="product-body">
+        <div class="product-brand">boAt</div>
+        <div class="product-name">Storm Smart Watch Pro</div>
+        <div class="product-rating"><span class="stars-s">★★★★☆</span><span class="rating-count">(3,100)</span></div>
+        <div class="product-price-row">
+          <span class="price-now">₹2,499</span>
+          <span class="price-was">₹4,999</span>
+          <span class="price-off">50% off</span>
+        </div>
+        <button class="add-cart">+ Add to Cart</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEALS -->
+<section id="deals" class="section reveal">
+  <div class="eyebrow">Limited Time</div>
+  <h2 class="sec-title">Today's Best Deals</h2>
+  <div class="sec-line"></div>
+  <div class="deals-grid">
+    <div class="deal-card" style="background:linear-gradient(135deg,#16a34a,#065f46)">
+      <span class="deal-emoji">👗</span>
+      <h3>Fashion Week Sale</h3>
+      <p>Up to 60% off on top fashion brands. Limited stock!</p>
+      <a href="#" class="deal-btn">Shop Fashion →</a>
+    </div>
+    <div class="deal-card" style="background:linear-gradient(135deg,#1d4ed8,#1e3a8a)">
+      <span class="deal-emoji">📱</span>
+      <h3>Tech Deals</h3>
+      <p>Big discounts on phones, laptops & accessories.</p>
+      <a href="#" class="deal-btn">Shop Tech →</a>
+    </div>
+    <div class="deal-card" style="background:linear-gradient(135deg,#b45309,#78350f)">
+      <span class="deal-emoji">🏠</span>
+      <h3>Home Refresh</h3>
+      <p>Transform your space with up to 45% off décor.</p>
+      <a href="#" class="deal-btn">Shop Home →</a>
+    </div>
+  </div>
+</section>
+
+<!-- WHY ZIVORA -->
+<section class="section section-alt reveal">
+  <div class="eyebrow">Why Choose Us</div>
+  <h2 class="sec-title">Everything in your favour</h2>
+  <div class="sec-line"></div>
+  <div class="bento">
+    <div class="bento-card wide">
+      <div class="bento-icon">🚚</div>
+      <h3>Real-Time Order Tracking</h3>
+      <p>Track your package from warehouse to doorstep — live. No more guessing games.</p>
+      <div class="tracker">
+        <div class="track-steps">
+          <div class="track-step"><div class="track-dot done">✓</div>Ordered</div>
+          <div class="track-line done"></div>
+          <div class="track-step"><div class="track-dot done">✓</div>Packed</div>
+          <div class="track-line done"></div>
+          <div class="track-step"><div class="track-dot active">📦</div>Shipped</div>
+          <div class="track-line"></div>
+          <div class="track-step"><div class="track-dot pending">🏠</div>Delivered</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bento-card">
+      <div class="bento-icon">🔒</div>
+      <h3>Secure Payments</h3>
+      <p>256-bit SSL encryption. Pay via UPI, card, net banking or EMI with full confidence.</p>
+    </div>
+
+    <div class="bento-card">
+      <div class="bento-icon">↩️</div>
+      <h3>Easy Returns</h3>
+      <p>Not happy? Return within 30 days for a full refund — no questions asked.</p>
+    </div>
+
+    <div class="bento-card">
+      <div class="bento-icon">⭐</div>
+      <h3>Verified Reviews</h3>
+      <p>Every review is from a real buyer. Shop with confidence backed by 4.8★ ratings.</p>
+      <div class="progress-track" style="margin-top:1rem">
+        <div class="progress-fill" style="--w:96%"></div>
+      </div>
+      <div class="progress-meta"><span>Customer Satisfaction</span><span>96%</span></div>
+    </div>
+
+    <div class="bento-card">
+      <div class="bento-icon">💬</div>
+      <h3>24/7 Support</h3>
+      <p>Live chat, email, or call — our support team is always ready to assist you.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section reveal">
+  <div class="eyebrow">Happy Shoppers</div>
+  <h2 class="sec-title">What our customers say</h2>
+  <div class="sec-line"></div>
+  <div class="testimonial-grid">
+    <div class="test-card">
+      <div class="stars-r">★★★★★</div>
+      <p>"Ordered a dress on Monday, arrived Tuesday morning! The quality is so much better than I expected for the price. Zivora is now my go-to shop."</p>
+      <div class="test-author">
+        <div class="test-av" style="background:linear-gradient(135deg,#16a34a,#86efac)">N</div>
+        <div>
+          <div class="test-name">Neha Reddy</div>
+          <div class="test-role">Fashion Blogger, Hyderabad</div>
+        </div>
+        <span class="verified-badge">✓ Verified</span>
+      </div>
+    </div>
+    <div class="test-card">
+      <div class="stars-r">★★★★★</div>
+      <p>"Bought a boAt smartwatch during their sale — 50% off is insane. Tracking was smooth and it arrived well-packaged. Highly recommend Zivora!"</p>
+      <div class="test-author">
+        <div class="test-av" style="background:linear-gradient(135deg,#2563eb,#60a5fa)">K</div>
+        <div>
+          <div class="test-name">Karthik Iyer</div>
+          <div class="test-role">Engineering Student, Chennai</div>
+        </div>
+        <span class="verified-badge">✓ Verified</span>
+      </div>
+    </div>
+    <div class="test-card">
+      <div class="stars-r">★★★★★</div>
+      <p>"The return process was incredibly simple. Got my refund in 2 days. Customer support replied within minutes. This is how online shopping should work."</p>
+      <div class="test-author">
+        <div class="test-av" style="background:linear-gradient(135deg,#d97706,#fde68a)">S</div>
+        <div>
+          <div class="test-name">Sneha Patil</div>
+          <div class="test-role">Working Professional, Pune</div>
+        </div>
+        <span class="verified-badge">✓ Verified</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<div class="cta-banner reveal">
+  <h2>Start Shopping on Zivora Today</h2>
+  <p>Join 1.2 million shoppers. Get ₹200 off your first order with code <strong style="color:var(--gold)">WELCOME200</strong></p>
+  <div class="cta-btns">
+    <a href="#" class="btn btn-gold">🛍️ Shop Now</a>
+    <a href="#contact" class="btn btn-outline">💬 Contact Us</a>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section id="contact" class="section section-alt reveal">
+  <div class="eyebrow">Get In Touch</div>
+  <h2 class="sec-title">We're here to help</h2>
+  <div class="sec-line"></div>
+  <div class="contact-grid">
+    <div class="contact-info">
+      <a href="mailto:isanakadivya@gmail.com" class="contact-item">
+        <span class="contact-icon">✉️</span>
+        <span>isanakadivya@gmail.com</span>
+        <span class="contact-label">Email</span>
+      </a>
+      <a href="tel:6304093878" class="contact-item">
+        <span class="contact-icon">📞</span>
+        <span>+91 6304093878</span>
+        <span class="contact-label">Phone</span>
+      </a>
+      <div class="contact-item">
+        <span class="contact-icon">🕐</span>
+        <span>Mon–Sat, 9 AM – 8 PM IST</span>
+        <span class="contact-label">Hours</span>
+      </div>
+      <div class="contact-item">
+        <span class="contact-icon">📍</span>
+        <span>Narayana Engineering College, Andhra Pradesh</span>
+        <span class="contact-label">Location</span>
+      </div>
+    </div>
+    <div class="contact-form">
+      <input class="form-input" type="text" placeholder="Your Name"/>
+      <input class="form-input" type="email" placeholder="Your Email"/>
+      <input class="form-input" type="text" placeholder="Subject"/>
+      <textarea class="form-textarea" placeholder="Your message..."></textarea>
+      <button class="btn btn-gold" style="width:100%;justify-content:center">Send Message →</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo" style="font-family:'Playfair Display',serif;font-size:1.4rem">Zivora</div>
+      <p>Your one-stop destination for fashion, electronics, home, and more. Delivered with care, every time.</p>
+      <div class="footer-socials">
+        <div class="social-btn">📘</div>
+        <div class="social-btn">📸</div>
+        <div class="social-btn">🐦</div>
+        <div class="social-btn">▶️</div>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Shop</h4>
+      <ul>
+        <li><a href="#">New Arrivals</a></li>
+        <li><a href="#">Best Sellers</a></li>
+        <li><a href="#">Sale</a></li>
+        <li><a href="#">Collections</a></li>
+        <li><a href="#">Gift Cards</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Help</h4>
+      <ul>
+        <li><a href="#">Track Order</a></li>
+        <li><a href="#">Returns & Refunds</a></li>
+        <li><a href="#">Size Guide</a></li>
+        <li><a href="#">FAQs</a></li>
+        <li><a href="#contact">Contact Us</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">About Zivora</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Press</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Service</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Zivora. All rights reserved. Built by Isanaka Divya Sai.</span>
+    <span>🔒 Secure Payments · 🚚 Fast Delivery · ↩️ Easy Returns</span>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  function checkReveals() {
+    document.querySelectorAll('.reveal').forEach(el => {
+      if (el.getBoundingClientRect().top < window.innerHeight - 60)
+        el.classList.add('visible');
+    });
+  }
+  window.addEventListener('scroll', checkReveals);
+  checkReveals();
+  setTimeout(checkReveals, 300);
+
+  // Wishlist toggle
+  document.querySelectorAll('.heart-btn, .wishlist-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      btn.textContent = btn.textContent === '🤍' ? '❤️' : '🤍';
+    });
+  });
+
+  // Add to cart
+  document.querySelectorAll('.add-cart').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const orig = this.textContent;
+      this.textContent = '✓ Added!';
+      this.style.background = 'var(--green2)';
+      this.style.color = '#fff';
+      setTimeout(() => {
+        this.textContent = orig;
+        this.style.background = '';
+        this.style.color = '';
+      }, 1500);
+    });
+  });
+
+  // Active nav
+  const secs = document.querySelectorAll('section[id]');
+  const navAs = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let cur = '';
+    secs.forEach(s => { if (window.scrollY >= s.offsetTop - 130) cur = s.id; });
+    navAs.forEach(a => { a.style.color = a.getAttribute('href') === '#' + cur ? 'var(--gold)' : ''; });
+  });
+</script>
+</body>
+</html>
